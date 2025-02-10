@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import os
 
 # Konfigurasi API Gemini
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent"
