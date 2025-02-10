@@ -3,7 +3,7 @@ torch
 torchvision
 torchaudio
 ultralytics  # Untuk YOLOv5
-opencv-python-headless
+opencv-python-headless==4.6.0.66
 google-generativeai  # Untuk API Gemini
 python-dotenv  # Untuk membaca API key dari .env
 numpy
