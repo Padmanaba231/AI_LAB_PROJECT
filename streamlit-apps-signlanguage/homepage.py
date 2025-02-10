@@ -32,7 +32,7 @@ def detect_objects(frame, model):
 
 def homepage():
     st.title("Deteksi Bahasa Isyarat BISINDO")
-    model_path = 'model_used/yolov5/best.pt'
+    model_path = './streamlit-apps-signlanguage/model_used/yolov5/best.pt'
     model = load_model(model_path)
 
     if "camera_active" not in st.session_state:
