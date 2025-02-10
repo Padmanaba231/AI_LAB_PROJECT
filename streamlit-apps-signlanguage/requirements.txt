@@ -8,3 +8,4 @@ google-generativeai  # Untuk API Gemini
 python-dotenv  # Untuk membaca API key dari .env
 numpy
 Pillow
+av
