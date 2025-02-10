@@ -3,7 +3,7 @@ import requests
 
 # Konfigurasi API Gemini
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent"
-API_KEY = ""  # Ganti dengan API Key Anda
+API_KEY = os.getenv("API_KEY")   # Ganti dengan API Key Anda
 
 # Konteks tentang BISINDO
 BISINDO_CONTEXT = (
