@@ -7,7 +7,7 @@ import time
 # --- Caching Model ---
 @st.cache_resource(show_spinner=False)
 def load_model(model_path):
-    return torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
+    return torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
 
 def get_color(class_id):
     np.random.seed(int(class_id))
