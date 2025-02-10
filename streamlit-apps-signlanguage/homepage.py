@@ -8,7 +8,9 @@ import os
 # --- Caching Model ---
 @st.cache_resource(show_spinner=False)
 def load_model(model_path):
-    return torch.hub.load('ultralytics/yolov8', 'custom', path=model_path, force_reload=True)
+    model = torch.load(model_path, map_location=torch.device('cpu'))  # Pakai CPU agar tidak ada masalah CUDA
+    model.eval()  # Set model ke mode evaluasi
+    return model
 
 def get_color(class_id):
     np.random.seed(int(class_id))
@@ -33,7 +35,7 @@ def detect_objects(frame, model):
 
 def homepage():
     st.title("Deteksi Bahasa Isyarat BISINDO")
-    model_path = os.path.join(os.getcwd(), "streamlit-apps-signlanguage/model_used/yolov8/best.pt")
+    model_path = os.path.join(os.getcwd(), "streamlit-apps-signlanguage/model_used/yolov5/best.pt")
     model = load_model(model_path)
 
     if "camera_active" not in st.session_state:
