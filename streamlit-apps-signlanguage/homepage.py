@@ -8,9 +8,7 @@ import os
 # --- Caching Model ---
 @st.cache_resource(show_spinner=False)
 def load_model(model_path):
-    model = torch.load(model_path, map_location=torch.device('cpu'))  # Pakai CPU agar tidak ada masalah CUDA
-    model.eval()  # Set model ke mode evaluasi
-    return model
+    return torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
 
 def get_color(class_id):
     np.random.seed(int(class_id))
