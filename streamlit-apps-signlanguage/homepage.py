@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 import av
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
+import pathlib
+import platform
 
 # --- Caching Model ---
 @st.cache_resource(show_spinner=False)
@@ -42,7 +44,12 @@ class VideoProcessor(VideoTransformerBase):
 
 def homepage():
     st.title("Deteksi Bahasa Isyarat BISINDO")
-
+    
+    # Check the operating system and set the appropriate path type
+    if platform.system() == 'Windows':
+        pathlib.PosixPath = pathlib.WindowsPath
+    else:
+        pathlib.WindowsPath = pathlib.PosixPath
     # Load model
     model_path = "./streamlit-apps-signlanguage/model_used/yolov5/best.pt"
     model = load_model(model_path)
