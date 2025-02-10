@@ -10,3 +10,4 @@ numpy
 Pillow
 av
 streamlit-webrtc
+libgl1
