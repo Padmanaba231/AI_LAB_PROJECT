@@ -9,3 +9,4 @@ python-dotenv  # Untuk membaca API key dari .env
 numpy
 Pillow
 av
+streamlit-webrtc
