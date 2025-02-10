@@ -4,7 +4,8 @@ import torch
 import numpy as np
 import time
 import os
-from pathlib import Path
+from pathlib
+import platform
 
 # --- Caching Model ---
 @st.cache_resource(show_spinner=False)
@@ -34,7 +35,15 @@ def detect_objects(frame, model):
 
 def homepage():
     st.title("Deteksi Bahasa Isyarat BISINDO")
-    model_path = Path("./streamlit-apps-signlanguage/model_used/yolov5/best.pt")
+
+    # Check the operating system and set the appropriate path type
+    if platform.system() == 'Windows':
+        pathlib.PosixPath = pathlib.WindowsPath
+    else:
+        pathlib.WindowsPath = pathlib.PosixPath
+    
+    # Load the model
+    model_path = "./streamlit-apps-signlanguage/model_used/yolov5/best.pt"
     model = load_model(model_path)
 
     if "camera_active" not in st.session_state:
