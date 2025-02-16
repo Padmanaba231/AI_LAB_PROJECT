@@ -29,7 +29,7 @@ def homepage():
           </style>
         </head>
         <body>
-          <h2>Deteksi Objek dengan Roboflow</h2>
+          <h2>Deteksi Objek dengan Yolo</h2>
           <p>Pastikan Anda memberikan izin akses kamera.</p>
           <canvas id="video_canvas" width="640" height="480"></canvas>
           <video id="video" width="640" height="480" autoplay style="display: none;"></video>
