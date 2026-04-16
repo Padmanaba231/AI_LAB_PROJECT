@@ -15,17 +15,32 @@ BISINDO_CONTEXT = (
 )
 
 def send_message_to_gemini(api_url, api_key, user_message, context):
+    if not api_key:
+        return "❌ API Key tidak ditemukan. Periksa environment variable API_KEY."
+    
     headers = {'Content-Type': 'application/json'}
     data = {"contents": [{"parts": [{"text": f"{context}\n\nPertanyaan pengguna: {user_message}"}]}]}
+    
     try:
         response = requests.post(f"{api_url}?key={api_key}", headers=headers, json=data)
         response_data = response.json()
+        
+        # Cek error dari API
+        if 'error' in response_data:
+            err = response_data['error']
+            return f"❌ API Error {err.get('code', '?')}: {err.get('message', 'Unknown error')}"
+        
         candidates = response_data.get('candidates', [])
         if candidates:
-            return candidates[0].get('content', {}).get('parts', [{}])[0].get('text', '') or "Maaf, bot tidak dapat memberikan balasan."
-        return "Maaf, bot tidak dapat memberikan balasan."
+            text = candidates[0].get('content', {}).get('parts', [{}])[0].get('text', '')
+            return text or "Maaf, bot tidak dapat memberikan balasan."
+        
+        return "Maaf, tidak ada respons dari model."
+    
     except requests.exceptions.RequestException as e:
-        return f"Terjadi kesalahan saat menghubungi API: {str(e)}"
+        return f"❌ Koneksi gagal: {str(e)}"
+    except Exception as e:
+        return f"❌ Error tidak terduga: {str(e)}"
 
 def chatbot_bisindo():
     st.title("Chatbot BISINDO")
